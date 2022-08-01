@@ -1,18 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteTodo } from "../features/todosSlice/TodosSlice";
+import { deleteTodo, updateState } from "../features/todosSlice/TodosSlice";
 
 const TodoList = () => {
-
-
   const { todos } = useSelector((state) => state.todos);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-
-
   const editHandler = (id, title) => {
     navigate("/editTodo", { state: { title, id } });
+  };
+  const doneHandler = (id, title) => {
+    dispatch(updateState({ id: id, text: title }));
   };
 
   return (
@@ -21,7 +19,7 @@ const TodoList = () => {
         {todos.map((t) => (
           <div
             key={t.id}
-            className="relative flex w-72 md:w-full justify-between border-2 px-4 py-2 rounded-lg border-slate-600 mt-3"
+           className={`relative flex w-72  md:w-full justify-between ${t.isCompleted && "opacity-50"} border-2 px-4 py-2 rounded-lg border-slate-600 mt-3`}
           >
             <div>
               <li className="flex flex-wrap">{t.title}</li>
@@ -35,8 +33,10 @@ const TodoList = () => {
               >
                 Edit
               </button>
-              <button className="border-2 text-bold px-1 rounded-lg ml-2 border-emerald-700 text-emerald-700">
-                Done
+              <button
+                onClick={(id, title) => doneHandler((id = t.id), (title = t.title))}
+                className={`border-2 relative text-bold w-14 px-1 rounded-lg ml-2 ${t.isCompleted && " border-slate-700 text-slate-700"}  border-emerald-700 text-emerald-700`} >
+                <span className={`absolute inset-0 items-center justify-center ${t.isCompleted && "text-xs mt-1"} `}>{t.isCompleted ? "unDone":"done"}</span>
               </button>
               <button
                 onClick={() => dispatch(deleteTodo({ id: t.id }))}

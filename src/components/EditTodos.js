@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { updateTodo } from "../features/todosSlice/TodosSlice";
 import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const EditTodos = () => {
   const location = useLocation();
@@ -14,11 +14,10 @@ const EditTodos = () => {
   const changeHandler = (e) => {
     setEditTodo(e.target.value);
   };
-  const updateTo =()=>{
-    dispatch(updateTodo({ id:id , text:editTodo}))
-    navigate("/")
-  }
-  
+  const updateTo = () => {
+    dispatch(updateTodo({ id: id, text: editTodo }));
+    navigate("/");
+  };
 
   return (
     <div className="w-full flex justify-center  ">
@@ -26,6 +25,7 @@ const EditTodos = () => {
         <div className="relative flex w-96  justify-between border-2 md:w-full px-4 py-2 rounded-lg border-slate-600 mt-3">
           <div>
             <input
+              className="border-2 border-slate-600 rounded-md outline-none px-2"
               type="text"
               value={editTodo}
               onChange={(e) => changeHandler(e)}

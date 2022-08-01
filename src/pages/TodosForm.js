@@ -19,7 +19,6 @@ const TodosForm = () => {
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_AUTH_KEY));
-    console.log("set :", userData);
     dispatch(getTodo({ data: userData }));
   }, []);
 

@@ -33,6 +33,17 @@ const TodosSlice = createSlice({
       updateItem.title = action.payload.text;
       todo[update] = updateItem;
     },
+    updateState: (state, action) => {
+      const todo = state.todos;
+      const update = state.todos.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      const updateItem = state.todos.find(
+        (item) => item.id === action.payload.id
+      );
+      updateItem.isCompleted = !updateItem.isCompleted ;
+      todo[update] = updateItem;
+    },
     getTodo: (state, action) => {
       if (state.todos.length) {
         state.todos = state.todos;
@@ -44,5 +55,5 @@ const TodosSlice = createSlice({
   },
 });
 
-export const { addTodo, deleteTodo, updateTodo, getTodo } = TodosSlice.actions;
+export const { addTodo, deleteTodo, updateTodo, getTodo ,updateState} = TodosSlice.actions;
 export default TodosSlice.reducer;
