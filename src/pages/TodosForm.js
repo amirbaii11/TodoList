@@ -19,7 +19,7 @@ const TodosForm = () => {
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_AUTH_KEY));
-    dispatch(getTodo({ data: userData }));
+    if (userData)dispatch(getTodo({ data: userData }))
   }, []);
 
   useEffect(() => {
