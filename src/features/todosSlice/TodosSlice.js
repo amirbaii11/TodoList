@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   todos: [],
-  selected:""
+  selected: ""
 };
 
 const TodosSlice = createSlice({
@@ -18,13 +18,10 @@ const TodosSlice = createSlice({
       state.todos.push(newTodo);
     },
     deleteTodo: (state, action) => {
-      console.log("state . todos" , JSON.stringify(state.todos));
       const filteredTodos = state.todos.filter(
         (t) => t.id !== action.payload.id
       );
       state.todos = filteredTodos;
-      console.log("state . todos" , JSON.stringify(state.todos.length));
-
     },
     updateTodo: (state, action) => {
       const todo = state.todos;
@@ -45,11 +42,11 @@ const TodosSlice = createSlice({
       const updateItem = state.todos.find(
         (item) => item.id === action.payload.id
       );
-      updateItem.isCompleted = !updateItem.isCompleted ;
+      updateItem.isCompleted = !updateItem.isCompleted;
       todo[update] = updateItem;
     },
     getTodo: (state, action) => {
-      if (state.todos.length ) {
+      if (state.todos.length) {
         state.todos = state.todos;
       } else {
         const todo = action.payload.data;
@@ -57,12 +54,19 @@ const TodosSlice = createSlice({
       }
     },
     selectOrder: (state, action) => {
-      const newSelect =  action.payload.isCompleted
-      state.selected = newSelect ;
-      console.log("select is : ",JSON.stringify(state.selected));
-    },
+      const newSelect = action.payload.isCompleted;
+      state.selected = newSelect;
+      console.log("select is : ", JSON.stringify(state.selected));
+    }
   },
 });
 
-export const { addTodo, deleteTodo, updateTodo, getTodo ,updateState , selectOrder} = TodosSlice.actions;
+export const {
+  addTodo,
+  deleteTodo,
+  updateTodo,
+  getTodo,
+  updateState,
+  selectOrder,
+} = TodosSlice.actions;
 export default TodosSlice.reducer;

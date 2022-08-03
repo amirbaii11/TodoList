@@ -1,10 +1,9 @@
-import { getTodo, addTodo } from "../features/todosSlice/TodosSlice";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { addTodo } from "../features/todosSlice/TodosSlice";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const TodosForm = () => {
-  const { todos } = useSelector((state) => state.todos);
-  const LOCAL_STORAGE_AUTH_KEY = "authState";
+ 
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
   const changeHandler = (e) => {
@@ -17,15 +16,7 @@ const TodosForm = () => {
     dispatch(addTodo({ title: inputValue }));
   };
 
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_AUTH_KEY));
-    if (userData)dispatch(getTodo({ data: userData }))
-  }, []);
 
-  useEffect(() => {
-    const data = JSON.stringify(todos);
-    localStorage.setItem(LOCAL_STORAGE_AUTH_KEY, data);
-  }, [todos]);
 
   return (
     <form
@@ -39,7 +30,7 @@ const TodosForm = () => {
           type="text"
           value={inputValue}
           onChange={changeHandler}
-          className="ml-2  border-2 border-slate-600 outline-none  rounded-lg w-32 md:w-72 focus:border-4 focus:border-slate-700 "
+          className="ml-2  border-2 border-slate-600 outline-none  rounded-lg w-36 md:w-80 focus:border-4 focus:border-slate-700 "
           placeholder="add todos..."
         />
         <button

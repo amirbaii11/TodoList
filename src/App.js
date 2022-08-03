@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 
 function App() {
 return (
-    <div className="px-24">
+    <div className="px-2 sm:px-16 md:px-24">
       <Provider store={store}>
         <Layout>
           <Routes>
